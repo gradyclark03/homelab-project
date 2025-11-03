@@ -33,6 +33,23 @@ I received a prompt to setup the domain controller and created the root domain n
 
 ![Version1 DC Creation](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-dc-creation.png)
 
-The machine restarted and applied changes and once when I was brought to the login screen, the CORP prefix appeared, indicating that Active Directory was working and the Domain Controller was setup:
+The machine restarted and applied changes and once I was brought to the login screen, the CORP prefix appeared, indicating that Active Directory was working and the Domain Controller was setup:
 
 ![Version1 DC Creation](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-ad-works.png)
+
+### Initializing DNS and DHCP
+I navigated to the DNS Manager from the Server Manager and created a forwarder for my server to google's DNS server (8.8.8.8) which gives the server access to the internet:
+
+![Version1 DNS Init](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-dns-add-google.png)
+
+I navigated to the DHCP manager from the Server Manager and created a new IPv4 scope:
+
+![Version1 DHCP Setup 1](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-dhcp-config1.png)
+
+I set the number of IPs to be leased to be 100, so from 10.0.0.100 to 10.0.0.200, and set the subnet mask to 24:
+
+![Version1 DHCP Setup 2](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-dhcp-config2.png)
+
+I then committed and activated the DHCP service.
+
+Once these were setup, I navigated to Active Directory Users and Computrs from the Tools dropdown in the top right of the Server Manager and created two users for the workstation machines.
