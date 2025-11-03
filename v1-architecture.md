@@ -29,3 +29,7 @@ This server will run on **Ubuntu Server 22.04** and will interact with the Secur
 For this homelab, I am using a spare computer which contains an Intel I7-7700K which is a Quad core processor, as well as 24GB of 2133MHz RAM. It also contains a 1TB HDD. The following minimum specs for each VM are provided by Grant Collins so I will be using them throughout the project:
 
 ![Version1 Minimum VM Specs](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/min-specs.png)
+
+All of the virtual machines are running in VirtualBox 7.0.
+
+To read about the setup process, [click here](https://github.com/gradyclark03/homelab-project/blob/main/v1-setup.md)
