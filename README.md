@@ -3,13 +3,15 @@ This project will begin by working through Grant Collin's course on projectsecur
 
 I may possibly write my own malware and/or keylogger which will communicate with an external server to simulate such data capturing and exfiltration.
 
-I will break up the documentation into three sections: **Initial Architecture**, **Initial Setup Process**, **Experiments**
+I am calling the initial homelab that results from following the homelab course "Version1".
 
-### Initial Architecture
-To read about the initial architecture click here
+I will break up the documentation into three sections: **Version1 Architecture**, **Version1 Setup Process**, **Experiments**
 
-### Initial Setup Process
-To read about the initial setup process click here
+### Version1 Architecture
+To read about the initial architecture [click here](https://github.com/gradyclark03/homelab-project/blob/main/v1-architecture.md)
+
+### Version1 Setup Process
+To read about the initial setup process [click here](https://github.com/gradyclark03/homelab-project/blob/main/v1-setup.md)
 
 ### Experiments
-To read about experiments performed on the homelab click here
+To read about experiments performed on the homelab [click here](https://github.com/gradyclark03/homelab-project/blob/main/experiments.md)
