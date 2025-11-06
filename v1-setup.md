@@ -59,7 +59,7 @@ Next I setup a Windows Enterprise client using the same setup process as the Win
 
 The same as with the Windows Server setup process, I partitioned the disks using the default values, and chose to use the partition with the largest size.
 
-Once the installation process was completed, I went into the network settings and set the IP to 10.0.0.100, and I set the DNS server to 10.0.0.5 (the domain controller's IP).
+Once the installation process was completed, I went into the network settings and set the machine's IP to 10.0.0.100, and I set the DNS server to 10.0.0.5 (the domain controller's IP).
 
 ![Version1 IP Config Win Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-config-ip-winclient.png)
 
@@ -70,5 +70,51 @@ Then I went into control panel and changed the workgroup name of the computer. I
 Closing out of control panel prompted me to restart the computer for changes to take effect. Once it restarted, I logged in as johnd on the active directory login I made under the CORP domain.
 
 ![Version1 Login Win Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-winclient-login.png)
+
+## Initializing Ubuntu Desktop Client
+Next I setup an Ubuntu Desktop client using the same setup process as previous virtual machines, though the setup wizard differed as it is Ubuntu.
+
+Once the installation process was complete, I went into network settings and set the machine's IP to 10.0.0.101 and the DNS server to 10.0.0.5 (the domain controller's IP).
+
+![Version1 IP Config Linux Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-linuxclient-config-ip.png)
+
+
+### Joining Active Directory
+I then began installing Samba Winbind, a third party program that allows Ubuntu to connect to Windows Active Directory. I ran the command "sudo apt -y install winbind libpam-winbind libnss-winbind krb5-config samba-dsdb-modules samba-vfs-modules" which began installing the library and its dependencies, which prompted me to enter the domain "CORP.PROJECT-X-DC.COM".
+
+I then edited the smb.conf file according to the tutorial:
+```     
+    [global]
+       kerberos method = secrets and keytab
+       realm = CORP.PROJECT-X-DC.COM
+       workgroup = CORP
+       security = ads
+       template shell = /bin/bash
+       winbind enum groups = Yes
+       winbind enum users = Yes
+       winbind separator = +
+       idmap config * : rangesize = 1000000
+       idmap config * : range = 1000000-19999999
+       idmap config * : backend = autorid
+```
+And I edited the nsswitch.conf file to have
+
+```
+    passwd:         files systemd winbind
+    group:          files systemd winbind
+```
+
+I went into the PAM configuration settings using "sudo pam-update" and cycled to the Create home directory on login option and set it to yes.
+
+Then I added "nameserver 10.0.0.5" (the DNS server) into the resolv.conf file.
+
+I joined the AD domain using the administrator account I set up on the DC.
+
+![Version1 AD Join Linux Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-linuxclient-joinad.png)
+
+I then logged into the AD using sudo login and entering the login credentials of the account I setup on the DC and successfully logged in.
+
+![Version1 AD Login Linux Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-linuxclient-aduserlogin.png)
+
 
 
