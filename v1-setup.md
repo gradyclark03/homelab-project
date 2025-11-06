@@ -23,7 +23,7 @@ According to the tutorial, it is suggested to create a new partition and use the
 
 Once the user was setup and I was in Windows Server, I set the IP to 10.0.0.5 through control panel:
 
-![Version1 IP Config](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-config-ip.png)
+![Version1 IP Config DC](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-config-ip-dc.png)
 
 I then added Active Directory Domain Services, DHCP and DNS Servers to the Windows Server:
 
@@ -53,3 +53,22 @@ I set the number of IPs to be leased to be 100, so from 10.0.0.100 to 10.0.0.200
 I then committed and activated the DHCP service.
 
 Once these were setup, I navigated to Active Directory Users and Computrs from the Tools dropdown in the top right of the Server Manager and created two users for the workstation machines.
+
+## Initializing Windows Enterprise Client
+Next I setup a Windows Enterprise client using the same setup process as the Windows Server machine. 
+
+The same as with the Windows Server setup process, I partitioned the disks using the default values, and chose to use the partition with the largest size.
+
+Once the installation process was completed, I went into the network settings and set the IP to 10.0.0.100, and I set the DNS server to 10.0.0.5 (the domain controller's IP).
+
+![Version1 IP Config Win Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-config-ip-winclient.png)
+
+Then I went into control panel and changed the workgroup name of the computer. I changed the computer name to project-x-win-client to adhere with the naming convention provided by the tutorial, and I changed the domain to corp.project-x-dc.com (the domain I set up for the DC). Once I did this, it prompted me to log in as a user, so I logged in as a user I previously made on the DC. Then I received a confirmation message showing I had connected to the DC. 
+
+![Version1 Connect to DC Win Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-winclient-connect-to-dc.png)
+
+Closing out of control panel prompted me to restart the computer for changes to take effect. Once it restarted, I logged in as johnd on the active directory login I made under the CORP domain.
+
+![Version1 Login Win Client](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-winclient-login.png)
+
+
