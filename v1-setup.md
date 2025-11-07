@@ -223,7 +223,34 @@ done
 
 After creating it, I ran the script in the background using ```./sudo email_poller.sh &```
 
-**Add Email Test Here**
+I was able to confirm MailHog and the email poller were working together by using a python script to send an email to MailHog, which then appeared as a notification in the client's terminal as can be seen below:
+
+![Version1 Client Email Test](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-client-emailtest.png)
+
+## Security Workstation
+I created the Security Onion virtual machine and ran through the setup wizard, creating the account I will use on the machine. Once the setup wizard had completed, I set the root password using ```sudo passwd root``` and typing my desired password into the prompts, and I then took a snapshot of the machine.
 
 ## Security Server
-I created the Security Onion virtual machine and ran through the setup wizard, creating the account I will use on the machine.
+Like with the Corporate Server, I cloned the Ubuntu Desktop client to reduce setup time.
+
+I then performed the same steps I performed for the Corporate Server to setup a new user and change the IP address.
+
+### Joining Active Directory
+Joining the Active Directory was identical to the steps in the Corporate Server, but a sec-box account had to be created to log in to the Active Directory.
+
+I went into the Active Directory Users and Computers menu and created SecUser:
+
+![Version1 AD Creating SecUser](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-adcreating-secuser.png)
+
+I then went into SecUser and created a Domain Group called **Domain Admins** and assigned SecUser to that group:
+
+![Version1 AD Creating Domain Group](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-creating-addomaingroup.png)
+
+I then logged into the new SecUser account on the AD successfully as it created a home directory on login:
+
+![Version1 SecUser Login](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-secuser-login.png)
+
+### Installing Wazuh (SIEM)
+I first installed curl on the machine and then ran the following command to download and install Wazuh ```curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh && sudo bash ./wazuh-install.sh -a -i```.
+
+Once the installation process finished, I went to http://localhost to access the Wazuh dashboard. I logged in using the credentials generated during the install process.

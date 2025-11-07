@@ -44,7 +44,7 @@ This workstation will run on **Security Onion 2.4** and will provide a variety o
 ---
 
 ## Security Server
-This server will run on **Ubuntu Server 22.04** and will interact with the Security Workstation to process and respond to events occurring on the network to ensure the security of connected clients.
+This server will run on **Ubuntu Desktop 22.04** and will interact with the Security Workstation to process and respond to events occurring on the network to ensure the security of connected clients. It will have Wazuh installed on it, an SIEM tool that will handle security monitoring and logging.
 
 ---
 
