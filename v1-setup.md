@@ -251,6 +251,39 @@ I then logged into the new SecUser account on the AD successfully as it created 
 ![Version1 SecUser Login](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-secuser-login.png)
 
 ### Installing Wazuh (SIEM)
-I first installed curl on the machine and then ran the following command to download and install Wazuh ```curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh && sudo bash ./wazuh-install.sh -a -i```.
+I first installed curl on the machine and then ran the following command to download and install Wazuh ```curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a -i```.
 
-Once the installation process finished, I went to http://localhost to access the Wazuh dashboard. I logged in using the credentials generated during the install process.
+Once the installation process finished, I went to https://localhost to access the Wazuh dashboard. I logged in using the credentials generated during the install process.
+
+![Version1 Wazuh Dashboard](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-dash.png)
+
+### Deploying a Windows Agent
+To receive data from clients, agents needs to be deployed on the machines. To do this I went to Agents Management -> Summary in the menu on the Wazuh dashboard. I then entered the server's IP address and the name of the agent which generated the following code: ```Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.0-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='10.0.0.10' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='homelab-win-client'```. Running that code followed by ```NET START Wazuh``` on the Windows Client activated the Windows Agent.
+
+![Version1 Wazuh WinAgent](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-winagent.png)
+
+I also repeated the same steps on the domain controller.
+
+### Deploying a Linux Agent
+To set up the Linux agent, I went to Agents Management -> Summary in the menu on the Wazuh dashboard. Like with the Windows client, I entered the server's IP address and the name of the agent which generated the following code: ```wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.0-1_amd64.deb && sudo WAZUH_MANAGER='10.0.0.10' WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME='homelab-linux-client' dpkg -i ./wazuh-agent_4.14.0-1_amd64.deb```. Running that code followed by ```sudo systemctl daemon-reload sudo systemctl enable wazuh-agent sudo systemctl start wazuh-agent``` on the Linux Client activated the Linux Agent.
+
+![Version1 Wazuh LinuxAgent](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-linuxagent.png)
+
+### Managing Groups on Wazuh
+Groups are useful to separate agents to create different configuration information for the different operating systems and have different logs and data collected depending on the operating system.
+
+To do this I went to Agents Management -> Groups in the menu on the Wazuh dashboard. I then clicked Add New Group and made a 'Windows' group and a 'Linux' group. To then add the clients to the groups, I went to Agents Management -> Summary and clicked on the 3 dots on the right of each agent and clicked 'Edit Group'. I then assigned them to their appropriate groups depending on their OS.
+
+![Version1 Wazuh Groups](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-groups.png)
+
+To edit the configuration information for each group I went to Agents Management -> Groups, and clicked on a group, starting with Windows. I then went to Files and clicked on the edit icon for the 'agent.conf' file. I edited it as follows:
+
+![Version1 Wazuh Winconf](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-winconf.png)
+
+This sets up Wazuh to monitor the Windows Security and Application Event logs.
+
+I performed the same steps to edit the 'agent.conf' file for the Linux group, with different contents as seen below:
+
+![Version1 Wazuh Linuxconf](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-linuxconf.png)
+
+This sets up Wazuh to monitor the default Linux logs.
