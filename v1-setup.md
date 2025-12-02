@@ -230,6 +230,8 @@ I was able to confirm MailHog and the email poller were working together by usin
 ## Security Workstation
 I created the Security Onion virtual machine and ran through the setup wizard, creating the account I will use on the machine. Once the setup wizard had completed, I set the root password using ```sudo passwd root``` and typing my desired password into the prompts, and I then took a snapshot of the machine.
 
+No further configuration was required for the time being.
+
 ## Security Server
 Like with the Corporate Server, I cloned the Ubuntu Desktop client to reduce setup time.
 
@@ -287,3 +289,6 @@ I performed the same steps to edit the 'agent.conf' file for the Linux group, wi
 ![Version1 Wazuh Linuxconf](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-wazuh-linuxconf.png)
 
 This sets up Wazuh to monitor the default Linux logs.
+
+# Next Steps
+Following the initial configuration and setup, I began to setup vulnerabilities and initiate attacks. This is detailed [here](https://github.com/gradyclark03/homelab-project/blob/main/experiments.md).
