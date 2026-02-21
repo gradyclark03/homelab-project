@@ -291,4 +291,4 @@ I performed the same steps to edit the 'agent.conf' file for the Linux group, wi
 This sets up Wazuh to monitor the default Linux logs.
 
 # Next Steps
-Following the initial configuration and setup, I began to setup vulnerabilities and initiate attacks. This is detailed [here](https://github.com/gradyclark03/homelab-project/blob/main/attacks.md).
+Following the initial configuration and setup, I began to setup vulnerabilities and initiate attacks. This is detailed [here](https://github.com/gradyclark03/homelab-project/blob/main/cyberattacks.md).
