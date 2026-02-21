@@ -1,4 +1,4 @@
-# Version1 Architecture
+# Architecture
 Following Grant Collin's course on Project Security on building a Cybersecurity Homelab, the homelab will follow the structure pictured below.
 
 ![Version1 Architecture](https://github.com/gradyclark03/homelab-project/blob/main/screenshots/v1-architecture.png)
@@ -55,4 +55,4 @@ For this homelab, I am using a spare computer which contains an Intel I7-7700K w
 
 All of the virtual machines are running in VirtualBox 7.0.
 
-To read about the setup process, [click here](https://github.com/gradyclark03/homelab-project/blob/main/v1-setup.md)
+To read about the setup process, [click here](https://github.com/gradyclark03/homelab-project/blob/main/setup.md)
